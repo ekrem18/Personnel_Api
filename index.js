@@ -19,7 +19,8 @@ const PORT = process.env?.PORT || 8000
 require('express-async-errors')
 /* ------------------------------------------------------- */
 //Configurations
-
+const {dbConnection} = require('./src/configs/dbConnection')
+dbConnection() //-------------------------------------------> yukarıda destructure yaptık çağırdık ancak burda da aktif ediyoruz. 
 
 
 

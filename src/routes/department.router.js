@@ -14,6 +14,7 @@ router.route('/:id')
     .patch(department.update)
     .delete(department.delete)
 
+router.get('/:id/personnels', department.personnels)
 
 
 

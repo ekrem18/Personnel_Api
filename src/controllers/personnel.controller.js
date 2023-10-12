@@ -10,11 +10,17 @@ module.exports={
         const data = await res.getModelList(Personnel)
         res.status(200).send({
             error:false,
+            detail:await res.getModelListDetails(Personnel),
             data
         })
     },
 
     create: async (req, res)=>{
+        const isLead = req.body?.isLead || false
+        if (isLead) {
+           const xyz= await Personnel.updateMany({departmentId: req.body.departmentId, isLead: true}, {isLead: false}) //req ile gelen departmentları getir. Onların içinde isLead'i true olanları da getir. ve false yap. ilk obje içerisindeki virgülü AND operatörü gibi düşünebilirsin
+        }
+
         const data = await Personnel.create(req.body) //--> Gönderilen req. body'i Personnel model'de create yap
         res.status(201).send({
             error:false,

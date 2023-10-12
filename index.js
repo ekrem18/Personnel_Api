@@ -33,6 +33,8 @@ app.use(require('cookie-session')({secret: process.env.SECRET_KEY}))
 app.use(require('./src/middlewares/findSearchSortPage'))
 
 
+
+
 /* ------------------------------------------------------- */
 //Routes
 app.all('/',(req,res)=>{
@@ -42,6 +44,7 @@ app.all('/',(req,res)=>{
     })
 })
 
+//Departments
 app.use('/departments', require('./src/routes/department.router'))
 
 app.use('/personnels', require('./src/routes/personnel.router'))

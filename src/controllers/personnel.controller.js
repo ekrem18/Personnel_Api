@@ -36,12 +36,21 @@ module.exports={
         })
     },
 
-    update: async (req, res)=>{
-        const data = await Personnel.updateOne({_id: req.params.id}, req.body)
+    update: async (req, res) => {
+
+        // isLead Control:
+        const isLead = req.body?.isLead || false
+        if (isLead) {
+            const { departmentId } = await Personnel.findOne({ _id: req.params.id }, { departmentId: 1 })
+            await Personnel.updateMany({ departmentId, isLead: true }, { isLead: false })
+        }
+
+        const data = await Personnel.updateOne({ _id: req.params.id }, req.body)
+
         res.status(202).send({
-            error:false,
+            error: false,
             data,
-            new: await Personnel.findOne({_id: req.params.id})
+            new: await Personnel.findOne({ _id: req.params.id })
         })
     },
 

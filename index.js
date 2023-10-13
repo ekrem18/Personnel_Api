@@ -32,21 +32,44 @@ app.use(require('cookie-session')({secret: process.env.SECRET_KEY}))
 
 app.use(require('./src/middlewares/findSearchSortPage'))
 
-app.use(async (req, res, next)=>{
+// app.use(async (req, res, next)=>{
     
-    const Personnel = require('./src/models/personnel.model')
+//     const Personnel = require('./src/models/personnel.model')
     
-    req.isLogin = false
+//     req.isLogin = false
     
-    if(req.session?.id) {
-        const user =await Personnel.findOne({_id:req.session.id})
-        if(user.password == req.session.password){
-            req.isLogin = true
-        }
+//     if(req.session?.id) {
+//         const user =await Personnel.findOne({_id:req.session.id})
+//         if(user.password == req.session.password){
+//             req.isLogin = true
+//         }
+//     }
+//     console.log('isLogin: ', req.isLogin)
+//     next()
+// } )
+
+const jwt = require('jsonwebtoken')
+
+app.use(async(req, res, next) =>{
+
+    const auth = req.headers?.authorization || null
+    const accessToken = auth ? auth.split(' ')[1] : null // JWT token'ı yakaladığımız yer
+
+    jwt.verify(accessToken, process.env.SECRET_KEY, function(err, user){//access token'ı doğrulama. Secret_key ile çözümle. gelen cevabı da call back fonk'a göre çalıştır.
+        if(err){
+            req.user = null
+            console.log('JWR Login: NO');
+    } else{
+        req.isLogin = true
+        req.user= user.isActive ? user : null   //bunu yapmak zorunda değilim.auth controller'da denetledim. eğer token varsa func'ın ikinci paramtresi olan user'ı kullanıyorum. aldın aktifse kullan değilse salla
+        console.log('JWT Login :YES');
     }
-    console.log('isLogin: ', req.isLogin)
+})
     next()
-} )
+
+}) 
+     
+
 
 
 /* ------------------------------------------------------- */

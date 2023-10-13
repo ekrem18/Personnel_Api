@@ -30,7 +30,7 @@ module.exports= {
                         username:user.username,
                         password: user.password
                     }
-                    const refreshToken= jwt.sign(refreshData, )
+                    const refreshToken= jwt.sign(refreshData, process.env.REFRESH_KEY, {expiresIn: '3d'} )
 
                 }else{
                 res.errorStatusCode = 401

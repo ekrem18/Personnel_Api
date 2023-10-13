@@ -34,7 +34,8 @@ module.exports= {
 
                     res.send({
                         error: 'false',
-                        token: { accessToken, refreshToken}
+                        token: { acces:accessToken, 
+                                 refresh:refreshToken}
                     })
 
                 }else{

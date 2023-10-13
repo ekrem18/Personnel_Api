@@ -33,8 +33,11 @@ app.use(require('cookie-session')({secret: process.env.SECRET_KEY}))
 app.use(require('./src/middlewares/findSearchSortPage'))
 
 app.use(async (req, res, next)=>{
+    
     const Personnel = require('./src/models/personnel.model')
+    
     req.isLogin = false
+    
     if(req.session?.id) {
         const user =await Personnel.findOne({_id:req.session.id})
         if(user.password == req.session.password){

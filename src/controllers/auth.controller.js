@@ -14,7 +14,22 @@ module.exports= {
 
             if(user) {
                 if(user.isActive){
-                    
+                    const accessData = {
+                        _id: user._id,
+                        departmentId: user.departmentId,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        isActive: user.isActive,
+                        isAdmin: user.isAdmin,
+                        isLead: user.isLead,
+
+                    }
+
+                    const refreshData ={
+                        username:user.username,
+                        password: user.password
+                    }
+
                 }else{
                 res.errorStatusCode = 401
                 throw new Error('This account is not active...')

@@ -49,25 +49,26 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 // } )
 
 const jwt = require('jsonwebtoken')
+app.use((req, res, next) => {
 
-app.use(async(req, res, next) =>{
+    const auth = req.headers?.authorization || null // get Authorization
+    const accessToken = auth ? auth.split(' ')[1] : null // get JWT
 
-    const auth = req.headers?.authorization || null
-    const accessToken = auth ? auth.split(' ')[1] : null // JWT token'ı yakaladığımız yer
+    // req.isLogin = false
 
-    jwt.verify(accessToken, process.env.SECRET_KEY, function(err, user){//access token'ı doğrulama. Secret_key ile çözümle. gelen cevabı da call back fonk'a göre çalıştır.
-        if(err){
+    jwt.verify(accessToken, process.env.ACCESS_KEY, function(err, user) {
+        if (err) {
             req.user = null
-            console.log('JWR Login: NO');
-    } else{
-        req.isLogin = true
-        req.user= user.isActive ? user : null   //bunu yapmak zorunda değilim.auth controller'da denetledim. eğer token varsa func'ın ikinci paramtresi olan user'ı kullanıyorum. aldın aktifse kullan değilse salla
-        console.log('JWT Login :YES');
-    }
-})
+            console.log('JWT Login: NO')
+        } else {
+            req.isLogin = true
+            req.user = user
+            // req.user = user.isActive ? user : null
+            console.log('JWT Login: YES')
+        }
+    })
     next()
-
-}) 
+})
      
 
 
@@ -79,7 +80,8 @@ app.all('/',(req,res)=>{
         error:false,
         message:'Welcome To Personnel Api',
         session: req.session,
-        isLogin:req.isLogin
+        isLogin:req.isLogin,
+        user:req.user
     })
 })
 

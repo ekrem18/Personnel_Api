@@ -50,15 +50,16 @@ module.exports= {
         res.errorStatusCode = 401
         throw new Error('Please enter username and password...')
     }
-},
+    },
 
     refresh: async (req, res)=>{
 
     },
 
     logout: async (req, res)=>{
-
+        res.send({
+            error: 'false',
+            mesaage:'No need any doing for logout'
+        })
     },
-
-
 }

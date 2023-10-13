@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken')
 
-moduke.exports = ((req, res, next) => {
+module.exports = ((req, res, next) => {
 
     const auth = req.headers?.authorization || null // get Authorization
     const accessToken = auth ? auth.split(' ')[1] : null // get JWT

@@ -15,7 +15,7 @@ router.route('/:id')
     .get(department.read)
     .put(permissions.isAdminOrLead, department.update)
     .patch(permissions.isAdminOrLead, department.update)
-    .delete(permissions.isAdminOrLead, department.delete)
+    .delete(permissions.isAdmin, department.delete)
 
 router.get('/:id/personnels', department.personnels)
 

@@ -2,12 +2,13 @@
 /*------------------------------- */
 const jwt = require('jsonwebtoken')
 const Personnel = require('../models/personnel.model')
+const f= require('../helpers/checkUserAndSetToken')
 
 
 module.exports= {
     
     login: async (req, res)=>{
-
+/*
         const {username, password} = req.body
         
         if(username && password){
@@ -50,10 +51,20 @@ module.exports= {
     } else{
         res.errorStatusCode = 401
         throw new Error('Please enter username and password...')
-    }
+    }*/
     },
 
     refresh: async (req, res)=>{
+        const refreshToken = req.body?.token?.refresh || null
+
+        if(refreshToken) {
+            const jwtData = jwt.verify(refreshToken, process.env.REFRESH_KEY) //--> refreshToken gelirse, bunu dekod edeceğim yer ve KEY'im burası
+
+            if(jwtData){
+
+            }
+
+        }
 
     },
 

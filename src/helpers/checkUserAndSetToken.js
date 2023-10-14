@@ -5,7 +5,7 @@
 const jwt = require("jsonwebtoken");
 const Personnel = require("../models/personnel.model");
 
-module.exports = async function (userData, withRefresh = true) {  // refresh kod ile acces kod oluşutururken yeni refresh kod almaya gefek olmadığından bu eklemeyi yapıyorum
+module.exports = async function (userData, withRefresh = true) {  // access kodu bittiği zaman access kodunu yeni bir refresh token almak için kullanırız
   let { username, password } = userData;
 
   if (username && password) {

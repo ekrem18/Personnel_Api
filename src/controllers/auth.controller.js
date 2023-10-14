@@ -3,6 +3,7 @@
 const jwt = require('jsonwebtoken')
 const Personnel = require('../models/personnel.model')
 const f= require('../helpers/checkUserAndSetToken')
+const checkUserAndSetToken = require('../helpers/checkUserAndSetToken')
 
 
 module.exports= {
@@ -52,6 +53,12 @@ module.exports= {
         res.errorStatusCode = 401
         throw new Error('Please enter username and password...')
     }*/
+
+        const checkUser = checkUserAndSetToken(req.body)
+        if(checkUser.error){
+            res.errorStatusCode = 401
+            throw new Error(checkUser.message)
+        }
     },
 
     refresh: async (req, res)=>{

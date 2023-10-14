@@ -1,15 +1,13 @@
-"use strict"
+"use strict";
 /*------------------------------- */
-const jwt = require('jsonwebtoken')
-const Personnel = require('../models/personnel.model')
-const f= require('../helpers/checkUserAndSetToken')
-const checkUserAndSetToken = require('../helpers/checkUserAndSetToken')
+const jwt = require("jsonwebtoken");
+const Personnel = require("../models/personnel.model");
+const f = require("../helpers/checkUserAndSetToken");
+const checkUserAndSetToken = require("../helpers/checkUserAndSetToken");
 
-
-module.exports= {
-    
-    login: async (req, res)=>{
-/*
+module.exports = {
+  login: async (req, res) => {
+    /*
         const {username, password} = req.body
         
         if(username && password){
@@ -54,31 +52,45 @@ module.exports= {
         throw new Error('Please enter username and password...')
     }*/
 
-        const checkUser = checkUserAndSetToken(req.body)
-        if(checkUser.error){
+    const checkUser = checkUserAndSetToken(req.body);
+    if (checkUser.error) {
+      res.errorStatusCode = 401;
+      throw new Error(checkUser.message);
+    } else {
+      res.send(checkUser);
+    }
+  },
+
+  refresh: async (req, res) => {
+    const refreshToken = req.body?.token?.refresh || null;
+
+    if (refreshToken) {
+      const jwtData = jwt.verify(refreshToken, process.env.REFRESH_KEY); //--> refreshToken gelirse, bunu dekod edeceğim yer ve KEY'im burası
+
+      if (jwtData) {
+
+        const checkUser = await checkUserAndSetToken(jwtData, false)
+        if (checkUser.error) {
             res.errorStatusCode = 401
             throw new Error(checkUser.message)
-        }
-    },
-
-    refresh: async (req, res)=>{
-        const refreshToken = req.body?.token?.refresh || null
-
-        if(refreshToken) {
-            const jwtData = jwt.verify(refreshToken, process.env.REFRESH_KEY) //--> refreshToken gelirse, bunu dekod edeceğim yer ve KEY'im burası
-
-            if(jwtData){
-
-            }
-
+        } else {
+            res.send(checkUser)
         }
 
-    },
+    } else {
+        res.errorStatusCode = 401
+        throw new Error('Wroong JWT Token')
+    }
+} else {
+    res.errorStatusCode = 401
+    throw new Error('Please entry token.refresh')
+}
+},
 
-    logout: async (req, res)=>{
-        res.send({
-            error: 'false',
-            mesaage:'No need any doing for logout'
-        })
-    },
+logout: async (req, res) => {
+res.send({
+    error: false,
+    message: 'No need any doing for logout. You must deleted Bearer Token from your browser.'
+})
+},
 }

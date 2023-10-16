@@ -26,9 +26,15 @@ dbConnection() //-------------------------------------------> yukarıda destruct
 
 /* ------------------------------------------------------- */
 //Middlewares
-//npm i morgan ----> logging
+    //npm i morgan ----> logging
 const morgan = require('morgan')
-app.use(morgan('tiny'))
+    // app.use(morgan('tiny'))
+// app.use(morgan('combined'))
+    //writing log
+const fs = require('node:fs')
+app.use(morgan('combined', {        //---> morgan combined ile yakaladığımız kodları 2.paramatrede
+    stream: fs.createWriteStream('access.log' , {flags: 'a'}) //--> stream property'si ile access.log dosyasını oluştur oraya kaydet dedim
+}))
 
 app.use(express.json()) //----------------------------------> gelen veriyi almak ve objeye çevirmek için express json kullanıyoruz
 

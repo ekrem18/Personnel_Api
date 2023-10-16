@@ -30,7 +30,31 @@
   "paths": {
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "JWT:Login",
+        "description": "Login with username and password",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -40,7 +64,32 @@
     },
     "/auth/refresh": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "JWT:Refresh",
+        "description": "Refresh accessToken with  ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "object",
+                  "properties": {
+                    "refresh": {
+                      "type": "string",
+                      "example": "...refreshToken..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -50,7 +99,11 @@
     },
     "/authlogout": {
       "get": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "JWT:Logout",
+        "description": "No need any doing for logout. You must deleted Bearer Token from your browser.",
         "responses": {
           "200": {
             "description": "OK"
@@ -558,7 +611,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1697456267193
+              "example": 1697461424728
             }
           }
         }

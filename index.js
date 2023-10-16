@@ -92,6 +92,14 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 // })
 app.use(require('./src/middlewares/authenticated'))
 
+// Documentation Middlewares:
+// Swagger-UI:
+// npm i swagger-ui-express
+const swaggerUi = require('swagger-ui-express')
+const swaggerJson = require('./swagger.json')
+// Parse/Run swagger.json and publish on any URL:
+app.use('/docs/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, { swaggerOptions: { persistAuthorization: true } }))
+
 
 
 /* ------------------------------------------------------- */
@@ -112,6 +120,8 @@ app.use('/auth', require('./src/routes/auth.router')),
 app.use('/departments', require('./src/routes/department.router'))
 
 app.use('/personnels', require('./src/routes/personnel.router'))
+
+
 
 /* ------------------------------------------------------- */
 // errorHandler:

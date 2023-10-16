@@ -79,6 +79,10 @@ module.exports={
     },
 
     delete: async (req, res)=>{
+          /*
+            #swagger.tags = ["Departments"]
+            #swagger.summary = "Delete Department"
+        */
         const data = await Department.deleteOne({_id: req.params.id})
         const isDeleted = data.deletedCount >= 1 ? true : false
         res.status(isDeleted ? 204 : 404).send({
@@ -88,6 +92,11 @@ module.exports={
     },
 
     personnels: async (req, res) => {
+
+          /*
+            #swagger.tags = ["Departments"]
+            #swagger.summary = "Get Personnels of any Department"
+        */
 
         const Personnel = require('../models/personnel.model')
 

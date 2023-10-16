@@ -26,6 +26,10 @@ dbConnection() //-------------------------------------------> yukarıda destruct
 
 /* ------------------------------------------------------- */
 //Middlewares
+//npm i morgan ----> logging
+const morgan = require('morgan')
+app.use(morgan('tiny'))
+
 app.use(express.json()) //----------------------------------> gelen veriyi almak ve objeye çevirmek için express json kullanıyoruz
 
 app.use(require('cookie-session')({secret: process.env.SECRET_KEY}))

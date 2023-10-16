@@ -93,12 +93,26 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 app.use(require('./src/middlewares/authenticated'))
 
 // Documentation Middlewares:
+
 // Swagger-UI:
 // npm i swagger-ui-express
 const swaggerUi = require('swagger-ui-express')
 const swaggerJson = require('./swagger.json')
 // Parse/Run swagger.json and publish on any URL:
 app.use('/docs/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, { swaggerOptions: { persistAuthorization: true } }))
+
+// Redoc:
+// npm i redoc-express
+const redoc = require('redoc-express')
+app.use('/docs/json', (req, res) => {
+    res.sendFile('swagger.json', { root: '.' })
+})
+app.use('/docs/redoc', redoc({
+    specUrl: '/docs/json',
+    title: 'API Docs',
+}))
+
+
 
 
 
@@ -108,6 +122,14 @@ app.all('/',(req,res)=>{
     res.send({
         error:false,
         message:'Welcome To Personnel Api',
+        api: {
+            documents: {
+                swagger: 'http://127.0.0.1:8000/docs/swagger',
+                redoc: 'http://127.0.0.1:8000/docs/redoc',
+                json: 'http://127.0.0.1:8000/docs/json',
+            },
+        
+        },
         session: req.session,
         isLogin:req.isLogin,
         user:req.user

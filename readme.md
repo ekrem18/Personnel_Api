@@ -6,7 +6,7 @@
 <br>
 <br>
 <h3>About My Project</h3>
-<p> ▫As you can see from the ER diagram, this API service project is built upon two different models. ▫JWT is used for encryption.  ▫A permission system is established for editing/changing something about personnels.  ▫Logging is implemented. </p>
+<p> 📌As you can see from the ER diagram, this API service project is built upon two different models. 📌JWT is used for encryption.  📌A permission system is established for editing/changing something about personnels.  📌Logging is implemented. </p>
 <br>
 <br>
 <h3>What is in this api project?</h3>

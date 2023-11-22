@@ -1,4 +1,4 @@
-<h1>Pizza_App Api</h1>
+<h1>Personnel_Api</h1>
 <br>
 <h3>Author</h3>
 
@@ -6,7 +6,7 @@
 <br>
 <br>
 <h3>About My Project</h3>
-<p> As you can see from the ER diagram, this API service project is built upon four different models.   1- JWT is used for encryption.   2- A permission system is established for pizza orders and the creation of pizzas.      3- Logging is implemented. </p>
+<p> As you can see from the ER diagram, this API service project is built upon two different models.   1- JWT is used for encryption.   2- A permission system is established for editing/changing something about personnels.      3- Logging is implemented. </p>
 <br>
 <br>
 <h3>What is in this api project?</h3>
@@ -19,31 +19,6 @@
   <li>Finding, Sorting and Pagination MW</li>
 </ul>
 <br>
-<h3>File Structure</h3>
-```
-    .env
-    .gitignore
-    index.js
-    readme.md
-    src/
-        configs/
-            dbConnection.js
-        controllers/
-            department.controller.js
-            personnel.controller.js
-        helpers/
-            passwordEncrypt.js
-        middlewares/
-            errorHandler.js
-            findSearchSortPage.js
-        models/
-            department.model.js
-            personnel.model.js
-        routes/
-            department.router.js
-            personnel.router.js
-```
-
 <h3>How to install</h3>
 If you want to clone the project to your local and test it, you must install first "npm i cookie-session",  
 "npm i express dotenv mongoose express-async-errors" and "npm i jsonwebtoken morgan".  

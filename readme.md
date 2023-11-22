@@ -19,27 +19,6 @@
   <li>Finding, Sorting and Pagination MW</li>
 </ul>
 <br>
-<br>
-<br>
-<h3>File Structure</h3>
-    src/
-        configs/
-            dbConnection.js
-        controllers/
-            department.controller.js
-            personnel.controller.js
-        helpers/
-            passwordEncrypt.js
-        middlewares/
-            errorHandler.js
-            findSearchSortPage.js
-        models/
-            department.model.js
-            personnel.model.js
-        routes/
-            department.router.js
-            personnel.router.js
-
 <h3>How to install</h3>
 If you want to clone the project to your local and test it, you must install first "npm i cookie-session",  
 "npm i express dotenv mongoose express-async-errors" and "npm i jsonwebtoken morgan".  

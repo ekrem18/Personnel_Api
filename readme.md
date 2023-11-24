@@ -6,7 +6,7 @@
 <br>
 <br>
 <h3>About My Project</h3>
-<p> 📌As you can see from the ER diagram, this API service project is built upon two different models. 📌JWT is used for encryption.  📌A permission system is established for editing/changing something about personnels.  📌Logging is implemented. </p>
+<p> 📌As you can see from the ER diagram, this API service project is built upon two different models. 📌JWT is used for encryption.  📌A permission system is established for editing/changing something about personnels.  📌Logging is implemented. 📌If you want to read the API documentation and check the structure, Swagger and Redoc documents are also available. To access them, you can follow the '/redoc' or '/swagger' routes. </p>
 <br>
 <br>
 <h3>What is in this api project?</h3>
@@ -17,6 +17,7 @@
   <li>Authentications MW</li>
   <li>Error Handler MW</li>
   <li>Finding, Sorting and Pagination MW</li>
+  <li>Swagger & Redoc Docs</li>
 </ul>
 <br>
 <h3>How to install</h3>
